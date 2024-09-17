@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { useUser } from "../../hooks/UserContext"
+
 import { api } from "../../services/api"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 
 import Logo from '../../assets/Logo.svg'
@@ -12,13 +15,16 @@ import {
     InputContainer,
     LeftContainer,
     RightContainer,
-    Title
+    Title,
+    Link
 } from "./styles"
 
 import { Button } from "../../components/Button"
 
 
 export function Login() {
+    const navigate = useNavigate();
+    const { putUserData } = useUser();
 
     const schema = yup
         .object({
@@ -37,20 +43,28 @@ export function Login() {
 
     console.log(errors);
     const onSubmit = async (data) => {
-        const response = await toast.promise(api.post('/session', {
+        const {data: userData} = await toast.promise(
+            api.post('/session', {
             email: data.email,
             password: data.password,
         }),
-        {
-            pending: 'Verificando seus dados',
-            success: 'Seja Bem-vindo (a) 👌',
-            error: 'Email ou Senha Incorretos 🤯'
-        },
-    );  
-        
-        
+            {
+                pending: 'Verificando seus dados',
+                success: {
+                    render() {
+                        setTimeout(() => {
+                            navigate('/')
+                        }, 2000);
+                        return 'Seja Bem-vindo (a) 👌'
+                    }
+                },
+                error: 'Email ou Senha Incorretos 🤯'
+            },
+        );
 
-        console.log(response);
+        putUserData(userData);
+
+        
     };
 
     return (
@@ -67,16 +81,16 @@ export function Login() {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <InputContainer >
                         <label>Email</label>
-                        <input type="email" {...register("email")}/>
+                        <input type="email" {...register("email")} />
                         <p>{errors?.email?.message}</p>
                     </InputContainer>
 
                     <InputContainer >
                         <label>Senha</label>
-                        <input type="password" {...register("password")}/>
+                        <input type="password" {...register("password")} />
                         <p>{errors?.password?.message}</p>
                     </InputContainer>
-                    <p>Não possui conta? <a> Clique aqui.</a></p>
+                    <p>Não possui conta? <Link to="/cadastro"> Clique aqui.</Link></p>
                     <Button type="submit">Entrar</Button>
                 </Form>
 
