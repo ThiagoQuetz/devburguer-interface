@@ -15,7 +15,8 @@ export const CartProvider = ({ children }) => {
         if (cartIndex >= 0) {
             newProductsInCart = cartProducts
 
-            newProductsInCart[cartIndex].quantity = newProductsInCart[cartIndex].quantity + 1;
+            newProductsInCart[cartIndex].quantity = 
+            newProductsInCart[cartIndex].quantity + 1;
 
             setCartProducts(newProductsInCart);
 
@@ -33,6 +34,9 @@ export const CartProvider = ({ children }) => {
   
 
     const clearCart = () => {
+        setCartProducts([]);
+
+        updateLocalStorage([]);
 
     }
 
@@ -55,7 +59,7 @@ export const CartProvider = ({ children }) => {
 
     }
 
-    const descreaseProduct = (productId) => {
+    const decreaseProduct = (productId) => {
         const cartIndex = cartProducts.findIndex((prd) => prd.id === productId);
 
         if (cartProducts[cartIndex].quantity > 1) {
@@ -91,7 +95,7 @@ export const CartProvider = ({ children }) => {
             cartProducts,
             putProductInCart,
             clearCart,
-            descreaseProduct,
+            decreaseProduct,
             increaseProduct,
             deleteProduct
         }}>
