@@ -1,55 +1,26 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import { Cart, Checkout, CompletePayment, Home, Login, Menu, Register } from "../containers";
+import { Cart, Checkout, CompletePayment, Home, Login, Menu, Register, Admin } from "../containers";
+import { UserLayout } from "../layouts/UserLayout";
+import { AdminLayout } from "../layouts/AdminLayout";
 
+export function Router() {
+    return (
+        <Routes>
+            <Route path="/" element={<UserLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/cardapio" element={<Menu />} />
+                <Route path="/carrinho" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/complete" element={<CompletePayment />} />
+            </Route>
 
-export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: (
-            <>
-            <Header />
-            <Home />
-            <Footer />
-            </>
-        ),
-       
-    },
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        path: '/cadastro',
-        element: <Register />,
-    },
-    {
-        path: '/cardapio',
-        element:(
+            <Route path="/admin" element={<AdminLayout/>}>
+                <Route path="/admin/home" element={<Admin/>}/>
+            </Route>
 
-        <>
-        <Header />
-        <Menu />
-        <Footer />
-        </>
-        )   
-    },
-    {
-        path: '/carrinho',
-        element: <Cart />,
-        
-    },
-    {
-        path: '/checkout',
-        element: <Checkout />,
-        
-    },
-    {
-        path: '/complete',
-        element: <CompletePayment />,
-        
-    },
-
-])
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Register />} />
+        </Routes>
+    )
+}

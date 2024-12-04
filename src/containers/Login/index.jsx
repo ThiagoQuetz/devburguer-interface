@@ -43,17 +43,23 @@ export function Login() {
 
     console.log(errors);
     const onSubmit = async (data) => {
-        const {data: userData} = await toast.promise(
+        const { data: userData } = await toast.promise(
             api.post('/session', {
-            email: data.email,
-            password: data.password,
-        }),
+                email: data.email,
+                password: data.password,
+            }),
             {
                 pending: 'Verificando seus dados',
                 success: {
                     render() {
                         setTimeout(() => {
-                            navigate('/')
+                            if(userData?.admin){
+                                navigate('/admin/home');
+                            }else{
+                                navigate('/');
+                            }
+                            
+                           
                         }, 2000);
                         return 'Seja Bem-vindo (a) 👌'
                     }
@@ -64,7 +70,8 @@ export function Login() {
 
         putUserData(userData);
 
-        
+
+
     };
 
     return (

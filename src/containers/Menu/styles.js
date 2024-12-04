@@ -59,13 +59,13 @@ export const CategoryButton = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     background: none;
-    color: ${(props) => (props.$isActiveCategory ? '#9858a6' : '#696969' )};
+    color: ${(props) => props.$isActiveCategory ? (props) => props.theme.purple : '#696969'};
     font-size: 24px;
     font-weight: 500;
     padding-bottom: 5px;
     line-height: 20px;
     border: none;
-    border-bottom: ${(props) => props.$isActiveCategory && '3px solid #9758a6'};
+    border-bottom: ${(props) => props.$isActiveCategory && `3px solid ${(props) => props.theme.purple}}`};
 
 `
 export const Voltar = styled(Link)`
