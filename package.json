@@ -10,11 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@hookform/resolvers": "^3.9.0",
-    "@mui/icons-material": "^6.1.6",
-    "@mui/material": "^6.1.6",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@hookform/resolvers": "^3.9.1",
+    "@mui/icons-material": "^6.2.0",
+    "@mui/material": "^6.2.0",
     "@mui/styled-engine-sc": "^6.1.6",
     "@mui/x-data-grid": "^7.22.1",
     "@phosphor-icons/react": "^2.1.7",
@@ -27,10 +27,10 @@
     "react-hook-form": "^7.52.1",
     "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^6.26.1",
-    "react-select": "^5.8.3",
+    "react-select": "^5.9.0",
     "react-toastify": "^10.0.5",
     "styled-components": "^6.1.13",
-    "yup": "^1.4.0"
+    "yup": "^1.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
